@@ -303,11 +303,11 @@ export type TreeLink = TreeBase & {
   form: `tree-${Form.Link}`
   link: {
     bond: TreeWave
-    // owner
-    cite: TreeWave
     // dereference
-    flex: TreeWave
+    cite: TreeWave
     // mutable
+    flex: TreeWave
+    // owner
     have: TreeWave
     line: TreeLineForm
     // reference

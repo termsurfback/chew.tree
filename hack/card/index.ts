@@ -3,7 +3,7 @@ import { Base } from '../form.js'
 import tool from '../tool.js'
 
 export * from './deck/index.js'
-export * from './mind/index.js'
+export * from './mint/index.js'
 
 export function loadCard(base: Base, link: string): void {
   if (tool.testHaveCard(base, link)) {

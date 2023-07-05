@@ -1,10 +1,10 @@
 
 load <../case>
-  hook mint head
-  hook mint base
+  find head
+  find base
 
 load <../task>
-  hook mint task
+  find task
 
 mint form
   mint name

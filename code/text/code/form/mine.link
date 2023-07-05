@@ -1,10 +1,10 @@
 
 load ../case
-  hook mine link
-  hook mine head
+  find link
+  find head
 
 load ../task
-  hook mine task
+  find task
 
 mine form
   mine term, term form
