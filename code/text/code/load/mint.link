@@ -1,0 +1,23 @@
+
+mint load
+  mint road
+    save road
+  mint load, form load
+    line load
+  mint hook, form hook
+    line hook
+  make load
+    bind road, link road
+    bind load, link load
+    bind hook, link hook
+    turn seed
+
+mint hook
+  mint name
+    save name
+  mint save
+    line save
+  make hook
+    bind name, link name
+    bind save, link save
+    turn seed

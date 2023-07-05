@@ -1,0 +1,96 @@
+
+load ../sift
+  hook mint sift
+
+load ../call
+  hook mint call
+
+load ../make
+  hook mint make
+
+mint task
+  mint name, save name
+  mint head, form head
+    line head
+  mint base, form base
+    line base
+  mint flow, form flow
+    line flow
+  mint task, form task
+    line task
+  make task
+    bind name, link name
+    bind bind, link bind
+    bind flow, link flow
+    bind task, link task
+    turn seed
+
+mint flow
+  mint call, form call
+    turn seed
+  mint make, form make
+    turn seed
+  mint save, form save
+    turn seed
+  mint turn, form turn
+    turn seed
+  mint rein, form rein
+    turn seed
+  mint show, form show
+    turn seed
+  mint halt, form halt
+    turn seed
+
+mint form
+  mint form
+    save name
+  turn seed
+    link form, link name
+
+mint list
+  mint form
+    save name
+  turn seed
+    form list
+      bind seat
+        link form, link name
+
+mint knit
+  mint form
+    save name
+  mint site
+    save site
+  turn seed
+    form knit
+      bind site, link site
+      bind seat, link form, link name
+
+mint save
+  mint base
+    save base
+  mint sift, form sift
+    save sift
+  make call
+    base task, task save
+    base bind
+      make bind
+        base name, term base
+        base sift, link base
+    base bind
+      make bind
+        base name, term head
+        base sift, link sift
+    turn seed
+
+mint show
+  mint sift, form sift
+    save sift
+  make show
+    base seed, link sift
+    turn seed
+
+mint halt
+  mint term
+    turn seed
+
+mint rein

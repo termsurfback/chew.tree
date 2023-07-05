@@ -1,0 +1,45 @@
+
+load <../../form/text>
+  hook form text
+  hook form head
+  hook form mate
+  hook form zone
+
+mint book
+  mint head, form head
+    save head
+  mint zone, form zone
+    line zone
+  make text
+    bind head, link head
+    bind zone, link zone
+    turn seed
+
+mint head
+  mint name
+    save name
+  mint mate, form mate
+    line mate
+  mint date
+    base seed
+    call mint-date
+      bind seed, link seed
+      save date
+  mint word
+    line word
+  mint text
+    save text
+  make head
+    bind name, link name
+    bind date, link date
+    bind mate, link mate
+    bind word, link word
+    bind text, link text
+    turn seed
+
+mint mate
+  mint name
+  mint cite
+  mint head
+
+form zone

@@ -1,0 +1,41 @@
+
+load ../call
+  hook mint call
+  hook mint flow
+  load /hook
+    hook mint hook
+
+mint test
+  mint name
+    save name
+  mint zone, form zone
+    line zone
+
+mint zone
+  mint call, form call
+    turn seed
+  mint find, form find
+    turn seed
+
+mint find
+  mint name
+    save name
+  mint bind, form bind
+    line bind
+  mint flow, form flow
+    line flow
+  mint hook, form hook
+    knit hook, site name
+  make find
+    bind name, link name
+    bind bind, link bind
+    bind hook, link hook
+    turn seed
+
+mint flow
+  mint save, form save
+    turn seed
+  mint turn, form turn
+    turn seed
+  mint cast, form cast
+    turn seed

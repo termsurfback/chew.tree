@@ -1,0 +1,47 @@
+
+mint head
+  mint name
+    save name
+  mint list, form list
+    save form
+  mint knit, form knit
+    save form
+  mint form, form form
+    save form
+  mint free, form free
+    save free
+  mint fall, form fall
+    save fall
+  make head
+    bind name, link name
+    bind make, link form
+    bind free, link free
+    bind fall, link fall
+    turn seed
+
+mint base
+  mint name
+    save name
+  mint list, form list
+    save form
+  mint knit, form knit
+    save form
+  mint form, form form
+    save form
+  mint free, form free
+    save free
+  mint fall, form fall
+    save fall
+  make base
+    bind name, link name
+    bind make, link form
+    bind free, link free
+    bind fall, link fall
+    turn seed
+
+mint free
+  mint sink
+    save sink
+  call mint-sink
+    bind seed, link sink
+    turn seed

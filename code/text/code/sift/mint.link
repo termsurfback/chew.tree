@@ -1,0 +1,50 @@
+
+load <../call>
+  hook mint call
+
+load <../make>
+  hook mint make
+
+mint sift
+  mint text
+    turn seed
+  mint link, form link
+    turn seed
+  mint move, form move
+    turn seed
+  mint read, form read
+    turn seed
+  mint loan, form loan
+    turn seed
+  mint make, form make
+    turn seed
+  mint call, form call
+    turn seed
+
+mint link
+  mint road
+    save road
+  make link
+    bind road, link road
+    turn seed
+
+mint move
+  mint road
+    save road
+  make move
+    bind road, link road
+    turn seed
+
+mint read
+  mint road
+    save road
+  make read
+    bind road, link road
+    turn seed
+
+mint loan
+  mint road
+    save road
+  make loan
+    bind road, link road
+    turn seed

@@ -1,0 +1,33 @@
+
+load <../case>
+  hook mint head
+  hook mint base
+
+load <../task>
+  hook mint task
+
+mint form
+  mint name
+    save name
+  mint form
+    line form
+  mint form, form seed
+    line seed
+  mint form, form head
+    line head
+  mint form, form base
+    line base
+  mint form, form bond
+    line bond
+  mint form, form task
+    line task
+  make form
+    bind name, link name
+    bind form, link form
+    bind head, link head
+    bind base, link base
+    bind bond, link bond
+    bind task, link task
+
+mint seed
+mint bond
