@@ -1,5 +1,5 @@
 
-deck @tunebond/loom
+deck @tunebond/mesh
   mark <0.0.1>
   link @tunebond/bolt, mark <0.x.x>
   link @tunebond/bind, mark <0.x.x>

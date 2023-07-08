@@ -1,5 +1,5 @@
 {
-  "name": "@tunebond/loom",
+  "name": "@tunebond/mesh",
   "main": "./host",
   "type": "module",
   "version": "0.1.0",

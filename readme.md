@@ -7,10 +7,10 @@
 <br/>
 
 <p align='center'>
-  <img src='https://github.com/tunebond/loom.link/blob/make/view/base.svg?raw=true' height='192'>
+  <img src='https://github.com/tunebond/mesh.link/blob/make/view/base.svg?raw=true' height='192'>
 </p>
 
-<h3 align='center'>loom.link</h3>
+<h3 align='center'>mesh.link</h3>
 <p align='center'>
   The Base Link Compiler Framework
 </p>
@@ -21,7 +21,7 @@
 
 ## Overview
 
-The `loom.link` project aims to be an advanced compiler for Link Text,
+The `mesh.link` project aims to be an advanced compiler for Link Text,
 as part of the Base Link ecosystem. It will just be a library which
 takes as input paths to files and outputs compiled data structures, and
 ultimately should be able to write out JavaScript, Swift, Rust, and

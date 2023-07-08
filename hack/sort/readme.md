@@ -82,11 +82,11 @@ The interpolated references are used to generate more of the AST?
 So we have the AST as used by the documentation tool. It goes:
 
 - link text tree (CST)
-- loom tree (AST), which is a wrapper around link tree
+- mesh tree (AST), which is a wrapper around link tree
 
-loom.text // link tree loom.link // properties
+mesh.text // link tree mesh.link // properties
 
-The loom tree is generated from the data. It is modified (modifying the
+The mesh tree is generated from the data. It is modified (modifying the
 link text nodes) to change the layout of the code. As we modify the CST,
 the meaning of the ranks (position of the code in text) goes away, since
 now we have added dynamic elements to it.
@@ -103,16 +103,16 @@ derive(Insertable)
 
 You need to
 
-    hook loom
+    hook mesh
 
     user.form.link.forEach
 
-    loom user
+    mesh user
 
-    loom any # include ast of all types
+    mesh any # include ast of all types
 
     form user
-      loom true
+      mesh true
 
     save user/email, <foo>
 
@@ -128,28 +128,28 @@ No, do the validation elsewhere.
       fuse insertable
 
     # like a tree/template, except it gives you the captured final AST as well.
-    loom insertable
-      take loom, like loom
+    mesh insertable
+      take mesh, like mesh
 
       hook fuse
         task insert
-          walk loom/link
+          walk mesh/link
 
     tree insertable
-      loom true
+      mesh true
 
       hook fuse
         task insert
-          take loom, like loom
+          take mesh, like mesh
           take self, like self
-          walk loom/link
+          walk mesh/link
 
-Gives you the loom/AST for each task, after it is complete.
+Gives you the mesh/AST for each task, after it is complete.
 
     form user
       task insert
         take self
-          loom true
+          mesh true
 
         walk self/form/link
           ...
@@ -157,44 +157,44 @@ Gives you the loom/AST for each task, after it is complete.
 If you want the AST for a specific task:
 
     task insert
-      loom true
+      mesh true
 
 If you want the AST for a whole module, just add it at the top level:
 
-    loom true
+    mesh true
 
 If you want the AST for everything, you can do this in a role file:
 
     file ./**/*.link
-      loom true
+      mesh true
 
     suit insertable
-      loom true
+      mesh true
 
       task insert
 
-The loom is the _final_ compiled target, which links to the link CST.
+The mesh is the _final_ compiled target, which links to the link CST.
 
 If you want the full AST with the CST, you need to simply parse the file
 again at runtime. Or perhaps there is a special `code true` term?
 
-The code is accessible in loom, you just read the file with loom and get
+The code is accessible in mesh, you just read the file with mesh and get
 the AST, then match it to the form id. Or do whatever to generate
 documentation, or use in the linter.
 
 So it's like, we call:
 
-    loom/make-tree
+    mesh/make-tree
 
 That gives us the final compiled tree, without typechecking or any of
 that.
 
-    loom/mold-tree
+    mesh/mold-tree
 
 That does typechecking and type inference.
 
-    loom/save-js
-    loom/save-link
+    mesh/save-js
+    mesh/save-link
 
 These take an AST and write the output file.
 
