@@ -76,3 +76,139 @@ Actually we want to add a tree of watchers, so they look up by property
 key.
 
 The interpolated references are used to generate more of the AST?
+
+---
+
+So we have the AST as used by the documentation tool. It goes:
+
+- link text tree (CST)
+- loom tree (AST), which is a wrapper around link tree
+
+loom.text // link tree loom.link // properties
+
+The loom tree is generated from the data. It is modified (modifying the
+link text nodes) to change the layout of the code. As we modify the CST,
+the meaning of the ranks (position of the code in text) goes away, since
+now we have added dynamic elements to it.
+
+The property `form-code` gives a number for the type, and has `unknown`
+type if it is unknown. You can't access the AST for the types at
+runtime. The form code is the hash of the module name + form name.
+
+How to access the form AST then at runtime?
+
+https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/procedural-macros.html
+
+derive(Insertable)
+
+You need to
+
+    hook loom
+
+    user.form.link.forEach
+
+    loom user
+
+    loom any # include ast of all types
+
+    form user
+      loom true
+
+    save user/email, <foo>
+
+calls
+
+    call user/save, 'email', <foo>
+
+And runs validations based on type.
+
+No, do the validation elsewhere.
+
+    form user
+      fuse insertable
+
+    # like a tree/template, except it gives you the captured final AST as well.
+    loom insertable
+      take loom, like loom
+
+      hook fuse
+        task insert
+          walk loom/link
+
+    tree insertable
+      loom true
+
+      hook fuse
+        task insert
+          take loom, like loom
+          take self, like self
+          walk loom/link
+
+Gives you the loom/AST for each task, after it is complete.
+
+    form user
+      task insert
+        take self
+          loom true
+
+        walk self/form/link
+          ...
+
+If you want the AST for a specific task:
+
+    task insert
+      loom true
+
+If you want the AST for a whole module, just add it at the top level:
+
+    loom true
+
+If you want the AST for everything, you can do this in a role file:
+
+    file ./**/*.link
+      loom true
+
+    suit insertable
+      loom true
+
+      task insert
+
+The loom is the _final_ compiled target, which links to the link CST.
+
+If you want the full AST with the CST, you need to simply parse the file
+again at runtime. Or perhaps there is a special `code true` term?
+
+The code is accessible in loom, you just read the file with loom and get
+the AST, then match it to the form id. Or do whatever to generate
+documentation, or use in the linter.
+
+So it's like, we call:
+
+    loom/make-tree
+
+That gives us the final compiled tree, without typechecking or any of
+that.
+
+    loom/mold-tree
+
+That does typechecking and type inference.
+
+    loom/save-js
+    loom/save-link
+
+These take an AST and write the output file.
+
+That way, the documentation can just call `make-tree` to get an AST
+ready for documentation generation. The linter can take the result of
+`make-tree` and rewrite some of the AST, to then call `save-link` and
+replace some of the file. Or if we want to generate the final js, we can
+call `mold-tree` and then `save-js`.
+
+The `mold-tree` will then do the typechecking. The typechecking is
+basically doing symbolic evaluation.
+
+A test generator can take the typed ast and generate tests based on
+constraints somehow.
+
+The make of the tree uses the mill grammars for the tree, to generate
+the structures.
