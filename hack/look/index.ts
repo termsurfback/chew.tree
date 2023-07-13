@@ -3,13 +3,20 @@
 export default class Look {
   link: Record<string, Look>
 
+  testLeaf: boolean
+
   constructor() {
     this.link = {}
+    this.testLeaf = false
   }
 
   seek(name: string) {
-    const look = new Look()
-    this.link[name] = look
+    const look = (this.link[name] ??= new Look())
     return look
+  }
+
+  leaf() {
+    this.testLeaf = true
+    return this
   }
 }

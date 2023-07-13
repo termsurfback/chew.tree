@@ -15,7 +15,7 @@ type SaveHook = {
 type FillLoad = {
   base?: Fill
   look: Look
-  name?: string
+  name: string
 }
 
 export default class Fill extends Emitter {
@@ -40,7 +40,9 @@ export default class Fill extends Emitter {
 
   look: Look
 
-  name?: string
+  name: string
+
+  sort?: string
 
   constructor({ look, base, name }: FillLoad) {
     super()
@@ -54,11 +56,7 @@ export default class Fill extends Emitter {
     this.takeFill = {}
     this.bindTest = {}
     this.sealVibe = false
-  }
-
-  seekRise() {
-    this.seekSize++
-    this.base?.seekRise()
+    this.seekRise()
   }
 
   hold(bond: Bind) {
@@ -66,68 +64,7 @@ export default class Fill extends Emitter {
     this.load(bond)
   }
 
-  bindSite(bond: BindSite) {
-    this.bindTest[bond.code] = true
-
-    bond.on(`save`, ({ name, bond: nestBond }: SaveHook) => {
-      this.holdLink(bond.code, name, nestBond)
-    })
-
-    for (const name in this.look.link) {
-      this.bindSiteLink(name, bond)
-    }
-  }
-
-  bindSiteLink(name: string, bond: BindSite) {
-    const look = this.look.link[name]
-    const fillHash = (this.fill[name] ??= {})
-
-    if (look) {
-      fillHash[bond.code] ??= new Fill({ base: this, look })
-      this.seekRise()
-    }
-  }
-
-  bindList(bond: BindList) {
-    this.bindTest[bond.code] = true
-
-    // this.seekRise() // for the seal on the list
-
-    bond.on(`save`, (bond: Bind) => {
-      // this.seekRise()
-      this.hold(bond)
-    })
-
-    bond.on(`seal`, () => {
-      this.haveRise()
-    })
-
-    bond.dock.forEach(bond => {
-      this.hold(bond)
-    })
-  }
-
-  bindSink(bond: BindSink) {
-    this.bindTest[bond.code] = true
-
-    // this.seekRise()
-
-    bond.on(`save`, () => {
-      this.haveRise()
-    })
-  }
-
-  bindHash(bond: BindHash) {
-    this.bindTest[bond.code] = true
-
-    // this.seekRise()
-
-    bond.on(`save`, () => {
-      this.haveRise()
-    })
-  }
-
-  bind(bond: Bind) {
+  protected bind(bond: Bind) {
     if (bond instanceof BindSite && !this.bindTest[bond.code]) {
       this.bindSite(bond)
 
@@ -153,26 +90,7 @@ export default class Fill extends Emitter {
     }
   }
 
-  loadSite(bond: BindSite) {
-    for (const name in this.fill) {
-      if (bond.have(name)) {
-        const link = bond.read(name)
-        if (link) {
-          this.loadLink(bond.code, name, link)
-        }
-      }
-    }
-  }
-
-  loadList(bond: BindList) {
-    bond.dock.forEach(bond => {
-      this.load(bond)
-    })
-  }
-
-  loadSink(bond: BindSink) {}
-
-  load(bond: Bind) {
+  protected load(bond: Bind) {
     if (bond instanceof BindSite) {
       this.loadSite(bond)
     }
@@ -184,11 +102,143 @@ export default class Fill extends Emitter {
     if (bond instanceof BindSink) {
       this.loadSink(bond)
     }
+  }
 
+  protected take() {
+    if (this.takeVibe) {
+      return
+    }
+
+    console.log('take')
+    console.log(' ', this.readLink())
+    console.log('   ', 'have:', this.haveSize, 'seek:', this.seekSize)
+    if (this.haveSize === this.seekSize) {
+      this.takeVibe = true
+      this.emit('take')
+    }
+  }
+
+  protected bindSite(bond: BindSite) {
+    this.bindTest[bond.code] = true
+
+    this.sort = 'site'
+
+    bond.on(`save`, ({ name, bond: nestBond }: SaveHook) => {
+      this.holdLink(bond.code, name, nestBond)
+    })
+
+    for (const name in this.look.link) {
+      this.bindSiteLink(name, bond)
+    }
+  }
+
+  protected bindSiteLink(name: string, bond: BindSite) {
+    const look = this.look.link[name]
+    const fillHash = (this.fill[name] ??= {})
+
+    if (look) {
+      fillHash[bond.code] ??= new Fill({
+        base: this,
+        look,
+        name,
+      })
+      // this.seekRise()
+
+      if (bond.have(name)) {
+        const link = bond.read(name)
+        if (link != null) {
+          this.holdLink(bond.code, name, link)
+        }
+      }
+    }
+  }
+
+  readLink() {
+    const link: Array<string> = []
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    let seed: Fill | undefined = this
+    while (seed) {
+      link.push(seed.name)
+      seed = seed.base
+    }
+    return link.reverse().join('/')
+  }
+
+  protected bindList(bond: BindList) {
+    this.seekRise() // for the seal on the list
+
+    this.sort = 'list'
+
+    this.bindTest[bond.code] = true
+
+    bond.on(`save`, (bond: Bind) => {
+      this.hold(bond)
+    })
+
+    bond.on(`seal`, () => {
+      this.haveRise()
+    })
+
+    bond.dock.forEach(bond => {
+      this.hold(bond)
+    })
+  }
+
+  protected bindSink(bond: BindSink) {
+    this.bindTest[bond.code] = true
+
+    this.sort = 'sink'
+
+    bond.on(`save`, () => {
+      this.haveRise()
+    })
+  }
+
+  protected bindHash(bond: BindHash) {
+    this.bindTest[bond.code] = true
+
+    this.sort = 'hash'
+
+    bond.on(`save`, () => {
+      this.haveRise()
+    })
+  }
+
+  protected loadSite(bond: BindSite) {
+    for (const name in this.fill) {
+      if (bond.have(name)) {
+        const link = bond.read(name)
+        if (link != null) {
+          this.loadLink(bond.code, name, link)
+        }
+      }
+    }
+
+    if (this.testMeet()) {
+      this.haveRise()
+    }
+  }
+
+  testMeet() {
+    return this.haveSize === this.seekSize - 1
+  }
+
+  protected loadList(bond: BindList) {
+    bond.dock.forEach(bond => {
+      this.load(bond)
+    })
+
+    if (this.testMeet()) {
+      this.haveRise()
+    }
+  }
+
+  protected loadSink(bond: BindSink) {
+    console.log('loadSink', this.readLink())
     this.haveRise()
   }
 
-  loadLink(code: string, name: string, bond: Bind) {
+  protected loadLink(code: string, name: string, bond: Bind) {
     const look = this.look.link[name]
     if (!look) {
       return
@@ -209,7 +259,7 @@ export default class Fill extends Emitter {
     fill.load(bond)
   }
 
-  holdLink(code: string, name: string, bond: Bind) {
+  protected holdLink(code: string, name: string, bond: Bind) {
     const look = this.look.link[name]
     if (!look) {
       return
@@ -230,27 +280,31 @@ export default class Fill extends Emitter {
     fill.hold(bond)
   }
 
-  haveRise() {
+  protected seekRise() {
+    this.seekSize++
+    // console.log('seekRise')
+    // console.log(' ', this.readLink())
+    // console.log('   ', 'have:', this.haveSize, 'seek:', this.seekSize)
+    this.base?.seekRise()
+  }
+
+  protected haveRise() {
     if (this.takeVibe) {
       return
     }
 
     this.haveSize++
 
+    console.log('HERE', this.sort, this.haveSize, this.seekSize)
+    if (this.sort === 'site' || this.sort === 'list') {
+      if (this.haveSize === this.seekSize - 1) {
+        // this.base?.haveRise()
+        this.haveRise()
+        return
+      }
+    }
+
     this.take()
-
     this.base?.haveRise()
-  }
-
-  take() {
-    console.log('seal', this.name, this.haveSize, this.seekSize)
-    if (this.takeVibe) {
-      return
-    }
-
-    if (this.haveSize === this.seekSize) {
-      this.takeVibe = true
-      this.emit('take')
-    }
   }
 }
