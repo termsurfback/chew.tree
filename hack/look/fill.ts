@@ -109,9 +109,9 @@ export default class Fill extends Emitter {
       return
     }
 
-    console.log('take')
-    console.log(' ', this.readLink())
-    console.log('   ', 'have:', this.haveSize, 'seek:', this.seekSize)
+    // console.log('take')
+    // console.log(' ', this.readLink())
+    // console.log('   ', 'have:', this.haveSize, 'seek:', this.seekSize)
     if (this.haveSize === this.seekSize) {
       this.takeVibe = true
       this.emit('take')
@@ -130,6 +130,15 @@ export default class Fill extends Emitter {
     for (const name in this.look.link) {
       this.bindSiteLink(name, bond)
     }
+
+    // for (const name in this.look.link) {
+    //   if (bond.have(name)) {
+    //     const link = bond.read(name)
+    //     if (link != null) {
+    //       this.holdLink(bond.code, name, link)
+    //     }
+    //   }
+    // }
   }
 
   protected bindSiteLink(name: string, bond: BindSite) {
@@ -143,13 +152,6 @@ export default class Fill extends Emitter {
         name,
       })
       // this.seekRise()
-
-      if (bond.have(name)) {
-        const link = bond.read(name)
-        if (link != null) {
-          this.holdLink(bond.code, name, link)
-        }
-      }
     }
   }
 
@@ -177,6 +179,7 @@ export default class Fill extends Emitter {
 
     bond.on(`seal`, () => {
       this.haveRise()
+      // this.haveRise()
     })
 
     bond.dock.forEach(bond => {
@@ -213,10 +216,6 @@ export default class Fill extends Emitter {
         }
       }
     }
-
-    if (this.testMeet()) {
-      this.haveRise()
-    }
   }
 
   testMeet() {
@@ -225,16 +224,17 @@ export default class Fill extends Emitter {
 
   protected loadList(bond: BindList) {
     bond.dock.forEach(bond => {
-      this.load(bond)
+      this.hold(bond)
     })
-
-    if (this.testMeet()) {
-      this.haveRise()
-    }
   }
 
   protected loadSink(bond: BindSink) {
-    console.log('loadSink', this.readLink())
+    // console.log(
+    //   'load sink',
+    //   this.readLink(),
+    //   this.haveSize,
+    //   this.seekSize,
+    // )
     this.haveRise()
   }
 
@@ -256,7 +256,7 @@ export default class Fill extends Emitter {
       return
     }
 
-    fill.load(bond)
+    fill.hold(bond)
   }
 
   protected holdLink(code: string, name: string, bond: Bind) {
@@ -282,6 +282,12 @@ export default class Fill extends Emitter {
 
   protected seekRise() {
     this.seekSize++
+    console.log(
+      'seekRise  ',
+      this.haveSize,
+      this.seekSize,
+      this.readLink(),
+    )
     // console.log('seekRise')
     // console.log(' ', this.readLink())
     // console.log('   ', 'have:', this.haveSize, 'seek:', this.seekSize)
@@ -289,22 +295,39 @@ export default class Fill extends Emitter {
   }
 
   protected haveRise() {
+    // console.log(
+    //   // new Error().stack,
+    //   'haveRise2',
+    //   this.haveSize,
+    //   this.seekSize,
+    //   this.readLink(),
+    //   this.takeVibe,
+    // )
     if (this.takeVibe) {
       return
     }
 
     this.haveSize++
 
-    console.log('HERE', this.sort, this.haveSize, this.seekSize)
-    if (this.sort === 'site' || this.sort === 'list') {
-      if (this.haveSize === this.seekSize - 1) {
-        // this.base?.haveRise()
-        this.haveRise()
-        return
-      }
-    }
+    console.log(
+      // new Error().stack,
+      'haveRise',
+      this.haveSize,
+      this.seekSize,
+      this.readLink(),
+    )
 
     this.take()
     this.base?.haveRise()
+
+    if (this.haveSize === this.seekSize - 1) {
+      this.haveRise()
+      return
+    }
+
+    // if (this.sort === 'list' && this.haveSize === this.seekSize - 1) {
+    //   console.log('ere')
+    //   this.haveRise()
+    // }
   }
 }
