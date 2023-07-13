@@ -1,6 +1,6 @@
 ## Comments
 
-Comments can be in many ways as `note`.
+Comments can be in many ways as `mark`.
 
     host note-name
       text markdown, <
@@ -47,7 +47,7 @@ Comments can be in many ways as `note`.
 
 Can do inline `text` format.
 
-    note
+    mark
       head 2, <Vector>
       text <Shortens the vector, keeping the first `len` elements and dropping
         the rest.>
@@ -55,7 +55,7 @@ Can do inline `text` format.
 
 Or even:
 
-    note md
+    mark md
       <Shortens the vector, keeping the first `len` elements and dropping
         the rest.>
 
@@ -89,3 +89,115 @@ Or, import the notes into your source code.
 
     task create-something
       note create-something
+
+---
+
+    call {{name}}
+
+    form: 'call',
+    name: LinkKnit | MeshLink (path) | MeshTerm
+
+    {{call}} name
+
+The non-leaf nodes need to be resolved by compile time.
+
+As these non-leaf nodes are being interpolated, they spawn tasks to
+resolve them when they are complete, and add them to the data model.
+
+    mesh.tree => links to link tree
+
+Wait on it to resolve. Watches a module for a specific path. If the path
+is an array, then it waits until the `done` trigger on the array
+children, so it knows it has received all the array elements.
+
+    card.bindingSet()
+      .waitFor('a')
+      .waitFor('b')
+      .waitFor('someArray/*/link/*')
+      .waitForArray('someArray')
+        .waitFor('link/name')
+      .then(() => {
+        handle()
+        removeFromBaseById()
+      })
+    card.set('a', 'foo')
+    card.set('someArray', [{ link: { name: 'bar' } }])
+    card.finish('someArray')
+
+All objects in the AST need to be bindable / emit events.
+
+    // BindingEnvironment
+    class FillBase {
+
+    }
+
+    class FillDeck {
+
+    }
+
+    class FillFile {
+
+    }
+
+    class FillHook {
+
+    }
+
+    class FillList {
+
+    }
+
+    class FillSite {
+
+    }
+
+@tunebond/fill-mesh.js
+
+A Bindable Fulfillment Library for Compiler AST Generation
+
+So then in mesh.link, it will create a new
+FillModule.hook().bind('foo/bar').bindList('form')
+
+Then it will notify everything that gets attached in the future if it is
+complete.
+
+- if bindings already exist, and we set something and it fulfills the
+  binding, then trigger.
+- if bindings don't exist until after it's been fulfilled, then trigger
+  immediately
+
+Then in mesh.link
+
+    // base.ts
+    class Base {
+      fill: FillBase
+      card: Record<string, Card>
+      task: Array<Task>
+      // env vars
+      host: Record<string, unknown>
+    }
+
+base.fill.save('link', cardFill)
+
+- marked as completely bound (bindHook: true)
+  - all wired up with required watchers
+- list items are is completely added (bindSeed: true)
+- mark as completely resolved (bindTake: true)
+  - watchers are all resolved
+
+So they have basically a shell.
+
+So they have basically a shell. The shell is what we are watching for,
+and it is filled with Bind objects. So we have the Fill tree and the
+Bind tree.
+
+    card.save('deep', deeplyNestedObject)
+
+    fillCard.bind(card) // card is a site
+
+    fillCard.wait('deep').wait('foo')
+
+    deeplyNestedObject.save('foo', 'bar')
+
+When you save the deeply nested object, it triggers the fill card which
+is bound to it, and it marks it off.

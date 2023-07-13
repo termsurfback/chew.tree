@@ -8,7 +8,8 @@
     "scan": "concurrently --kill-others \"tsc -w\" \"tsc-alias -w\"",
     "lint": "eslint --ext .ts ./make",
     "lint:fix": "npm run lint -- --fix",
-    "test": "node host/task/build",
+    "test": "tsx make/test",
+    "test:fill": "tsx hack/look/test.ts",
     "host": "pnpm make && npm publish --access=public"
   },
   "devDependencies": {
@@ -35,11 +36,12 @@
     "eslint-plugin-sort-exports": "^0.8.0",
     "eslint-plugin-sort-keys": "^2.3.5",
     "eslint-plugin-typescript-sort-keys": "^2.1.0",
+    "json-keys-sort": "^2.1.0",
     "prettier": "^2.8.1",
+    "sort-keys-recursive": "^2.1.8",
     "ts-node": "^10.9.1",
     "tsc-alias": "^1.8.2",
-    "json-keys-sort": "^2.1.0",
-    "sort-keys-recursive": "^2.1.8",
+    "tsx": "^3.12.7",
     "typescript": "^4.9.4"
   },
   "dependencies": {
@@ -49,6 +51,7 @@
     "@tunebond/have": "^0.1.2",
     "@tunebond/link": "*",
     "error-stack-parser": "^2.1.4",
+    "events": "^3.3.0",
     "glob": "^8.0.3",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
