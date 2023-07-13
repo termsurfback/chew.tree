@@ -54,7 +54,6 @@ export default class Fill extends Emitter {
     this.takeFill = {}
     this.bindTest = {}
     this.sealVibe = false
-    this.seekRise()
   }
 
   seekRise() {
@@ -85,13 +84,14 @@ export default class Fill extends Emitter {
 
     if (look) {
       fillHash[bond.code] ??= new Fill({ base: this, look })
+      this.seekRise()
     }
   }
 
   bindList(bond: BindList) {
     this.bindTest[bond.code] = true
 
-    // this.seekRise() // for the seal
+    // this.seekRise() // for the seal on the list
 
     bond.on(`save`, (bond: Bind) => {
       // this.seekRise()
@@ -110,6 +110,8 @@ export default class Fill extends Emitter {
   bindSink(bond: BindSink) {
     this.bindTest[bond.code] = true
 
+    // this.seekRise()
+
     bond.on(`save`, () => {
       this.haveRise()
     })
@@ -117,6 +119,8 @@ export default class Fill extends Emitter {
 
   bindHash(bond: BindHash) {
     this.bindTest[bond.code] = true
+
+    // this.seekRise()
 
     bond.on(`save`, () => {
       this.haveRise()
@@ -169,25 +173,19 @@ export default class Fill extends Emitter {
   loadSink(bond: BindSink) {}
 
   load(bond: Bind) {
-    this.haveRise()
-
     if (bond instanceof BindSite) {
       this.loadSite(bond)
-
-      return
     }
 
     if (bond instanceof BindList) {
       this.loadList(bond)
-
-      return
     }
 
     if (bond instanceof BindSink) {
       this.loadSink(bond)
-
-      return
     }
+
+    this.haveRise()
   }
 
   loadLink(code: string, name: string, bond: Bind) {
