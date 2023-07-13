@@ -223,6 +223,9 @@ export default class Fill extends Emitter {
   }
 
   protected loadList(bond: BindList) {
+    if (bond.vibeSeal) {
+      this.haveRise()
+    }
     bond.dock.forEach(bond => {
       this.hold(bond)
     })

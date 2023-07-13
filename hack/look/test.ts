@@ -56,11 +56,11 @@ a.save('b', b)
 a.save('x', x)
 d_a.save('c3', d_a_c3)
 d.saveHead(d_a)
+d.seal()
 b_a.save('d', d)
 
 site.save('a', a)
 
 b.seal()
-d.seal()
 
 console.log('done')
