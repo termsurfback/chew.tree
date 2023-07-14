@@ -1,8 +1,0 @@
-
-mint make
-  mint bind
-    line bind
-  mint call-save
-    save flow
-  mint call-turn
-    save flow
