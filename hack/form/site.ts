@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Base, FormMesh } from '@tunebond/form'
+import { Base, FormMesh } from '@nerdbond/form'
 
 export class TreeBase {
   link: Record<string, unknown>

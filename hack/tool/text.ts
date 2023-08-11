@@ -31,7 +31,7 @@ export function bindText(load: MeshLoad, hook: (text: string) => void) {
   }
 }
 
-// https://github.com/tunebond/base.link/blob/make/make/tool/dependency.ts#L277
+// https://github.com/nerdbond/base.link/blob/make/make/tool/dependency.ts#L277
 export function loadNickText(load: MeshLoad) {}
 
 export function loadText(load: MeshLoad) {}
