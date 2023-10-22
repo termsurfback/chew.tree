@@ -151,7 +151,7 @@ All objects in the AST need to be bindable / emit events.
 
     }
 
-@nerdbond/fill-mesh.js
+@wavebond/fill-mesh.js
 
 A Bindable Fulfillment Library for Compiler AST Generation
 

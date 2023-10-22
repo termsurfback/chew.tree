@@ -1,5 +1,5 @@
 
-deck @nerdbond/mesh
+deck @wavebond/mesh
   mark <0.0.1>
-  link @nerdbond/bolt, mark <0.x.x>
-  link @nerdbond/bind, mark <0.x.x>
+  link @wavebond/bolt, mark <0.x.x>
+  link @wavebond/bind, mark <0.x.x>

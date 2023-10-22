@@ -1,5 +1,5 @@
 {
-  "name": "@nerdbond/mesh",
+  "name": "@wavebond/mesh",
   "main": "./host",
   "type": "module",
   "version": "0.1.0",
@@ -47,9 +47,8 @@
   "dependencies": {
     "@babel/parser": "^7.22.5",
     "@babel/types": "^7.22.5",
-    "@nerdbond/form": "^0.2.2",
-    "@nerdbond/have": "^0.1.2",
-    "@nerdbond/link": "*",
+    "@wavebond/have": "^0.x.x",
+    "@wavebond/link": "*",
     "error-stack-parser": "^2.1.4",
     "events": "^3.3.0",
     "glob": "^8.0.3",
