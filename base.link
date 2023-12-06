@@ -1,5 +1,5 @@
 
-deck @wavebond/mesh
+deck @textsurf/mesh
   mark <0.0.1>
-  link @wavebond/bolt, mark <0.x.x>
-  link @wavebond/bind, mark <0.x.x>
+  link @textsurf/bolt, mark <0.x.x>
+  link @textsurf/bind, mark <0.x.x>

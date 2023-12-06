@@ -1,5 +1,5 @@
 {
-  "name": "@wavebond/mesh",
+  "name": "@textsurf/mesh",
   "main": "./host",
   "type": "module",
   "version": "0.1.0",
@@ -47,8 +47,8 @@
   "dependencies": {
     "@babel/parser": "^7.22.5",
     "@babel/types": "^7.22.5",
-    "@wavebond/have": "^0.x.x",
-    "@wavebond/link": "*",
+    "@textsurf/have": "^0.x.x",
+    "@textsurf/link": "*",
     "error-stack-parser": "^2.1.4",
     "events": "^3.3.0",
     "glob": "^8.0.3",
