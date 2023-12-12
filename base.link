@@ -1,5 +1,5 @@
 
-deck @textsurf/mesh
+deck @termsurf/mesh
   mark <0.0.1>
-  link @textsurf/bolt, mark <0.x.x>
-  link @textsurf/bind, mark <0.x.x>
+  link @termsurf/bolt, mark <0.x.x>
+  link @termsurf/bind, mark <0.x.x>
