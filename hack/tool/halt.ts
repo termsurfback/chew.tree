@@ -19,7 +19,7 @@ import type {
   TextTokenType,
 } from '~'
 
-export class BaseLinkError extends Error {
+export class BaseNoteError extends Error {
   data: SiteErrorType
 
   constructor(message: string, data: SiteErrorType) {
@@ -1039,7 +1039,7 @@ export function throwError(data: SiteErrorType): void {
     )
   }
 
-  const error = new BaseLinkError(text.join('\n'), data)
+  const error = new BaseNoteError(text.join('\n'), data)
   error.name = ''
 
   Error.captureStackTrace(error)

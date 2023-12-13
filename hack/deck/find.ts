@@ -22,9 +22,9 @@ export function findHostLink(
           }
         }
       }
-      const baseLink = `${base}/base.link`
-      if (testFile(baseLink)) {
-        return readLink(baseLink)
+      const BaseNote = `${base}/base.link`
+      if (testFile(BaseNote)) {
+        return readLink(BaseNote)
       }
     }
   }
@@ -56,9 +56,9 @@ export function findLeadLink(linkBase: string): string | void {
           }
         }
       }
-      const baseLink = `${linkBaseBond}/base.link`
-      if (testFile(baseLink)) {
-        return readLink(baseLink)
+      const BaseNote = `${linkBaseBond}/base.link`
+      if (testFile(BaseNote)) {
+        return readLink(BaseNote)
       }
     }
   }

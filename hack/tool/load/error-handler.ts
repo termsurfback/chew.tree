@@ -1,6 +1,6 @@
 export function watchUnhandledErrors(): void {
   process.on('unhandledRejection', (reason: unknown) => {
-    if (reason instanceof BaseLinkError) {
+    if (reason instanceof BaseNoteError) {
       console.log(reason.stack)
     } else if (
       reason instanceof Error &&
