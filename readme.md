@@ -7,10 +7,10 @@
 <br/>
 
 <p align='center'>
-  <img src='https://github.com/termsurf/mesh.link/blob/make/view/base.svg?raw=true' height='192'>
+  <img src='https://github.com/termsurf/mesh.note/blob/make/view/base.svg?raw=true' height='192'>
 </p>
 
-<h3 align='center'>mesh.link</h3>
+<h3 align='center'>mesh.note</h3>
 <p align='center'>
   The BaseLink Compiler Framework
 </p>
@@ -21,7 +21,7 @@
 
 ## Overview
 
-The `mesh.link` project aims to be an advanced compiler for Link Text,
+The `mesh.note` project aims to be an advanced compiler for Link Text,
 as part of the BaseLink ecosystem. It will just be a library which takes
 as input paths to files and outputs compiled data structures, and
 ultimately should be able to write out JavaScript, Swift, Rust, and
