@@ -12,7 +12,7 @@
 
 <h3 align='center'>mesh.note</h3>
 <p align='center'>
-  The BaseLink Compiler Framework
+  The BaseNote Compiler Framework
 </p>
 
 <br/>
@@ -22,7 +22,7 @@
 ## Overview
 
 The `mesh.note` project aims to be an advanced compiler for Link Text,
-as part of the BaseLink ecosystem. It will just be a library which takes
+as part of the BaseNote ecosystem. It will just be a library which takes
 as input paths to files and outputs compiled data structures, and
 ultimately should be able to write out JavaScript, Swift, Rust, and
 Kotlin.
@@ -32,9 +32,9 @@ without types so the thousands of modules of types doesn't grow the size
 of the output bundle.
 
 At first this library is written in TypeScript mostly, until it can be
-ultimately rewritten in BaseLink Text itself. The `hack` folder contains
+ultimately rewritten in BaseNote Text itself. The `hack` folder contains
 stuff on finding dependencies which need to be resolved in the folder
-structure defined by the BaseLink spec, and for parsing the parser
+structure defined by the BaseNote spec, and for parsing the parser
 definitions. Once we can parse the parser definitions, we can use the
 parser definitions to parse the "code" format.
 
