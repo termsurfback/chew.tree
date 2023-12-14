@@ -21,9 +21,9 @@
 
 ## Overview
 
-The `mesh.note` project aims to be an advanced compiler for Link Text,
-as part of the BaseNote ecosystem. It will just be a library which takes
-as input paths to files and outputs compiled data structures, and
+The `mesh.note` project aims to be an advanced compiler for NoteText, as
+part of the BaseNote ecosystem. It will just be a library which takes as
+input paths to files and outputs compiled data structures, and
 ultimately should be able to write out JavaScript, Swift, Rust, and
 Kotlin.
 
@@ -42,7 +42,7 @@ parser definitions to parse the "code" format.
 
 The compiler works in a few rough phases currently:
 
-1. **Parse the text** into a "link tree" (link, the language). This
+1. **Parse the text** into a "link tree" (note, the language). This
    generates a simple object tree which we then convert into a more
    general AST.
 1. **Generate the central AST**, the "tree". This is the main data
