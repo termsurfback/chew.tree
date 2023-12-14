@@ -7,12 +7,12 @@
 <br/>
 
 <p align='center'>
-  <img src='https://github.com/termsurf/mesh.note/blob/make/view/base.svg?raw=true' height='192'>
+  <img src='https://github.com/termsurf/chew.note/blob/make/view/chew.svg?raw=true' height='256'>
 </p>
 
-<h3 align='center'>mesh.note</h3>
+<h3 align='center'>chew.note</h3>
 <p align='center'>
-  The BaseNote Compiler Framework
+  The BaseNote Compiler Library
 </p>
 
 <br/>
@@ -21,7 +21,7 @@
 
 ## Overview
 
-The `mesh.note` project aims to be an advanced compiler for NoteText, as
+The `chew.note` project aims to be an advanced compiler for NoteText, as
 part of the BaseNote ecosystem. It will just be a library which takes as
 input paths to files and outputs compiled data structures, and
 ultimately should be able to write out JavaScript, Swift, Rust, and
@@ -95,10 +95,10 @@ these sorts of situations:
   can be compiled except this (possibly a name).
 - `foo bar`: Everything is static and can be statically compiled.
 
-At first, each node is progressively resolved as a `MeshGatherType`,
+At first, each node is progressively resolved as a `chewGatherType`,
 which means it simply collects an array of children, possibly with
 dynamic head terms. Then if none of the head terms are dynamic, then it
-compiles it into a more specific mesh type based on what it is. This
+compiles it into a more specific chew type based on what it is. This
 second-level compilation target is still incomplete however, because
 some of the nodes can still be dynamic. So then we try and resolve them,
 if they resolve, they are static. If not, they are runtime.
