@@ -7,12 +7,12 @@
 <br/>
 
 <p align='center'>
-  <img src='https://github.com/termsurf/chew.note/blob/make/view/chew.svg?raw=true' height='256'>
+  <img src='https://github.com/termsurf/chew.star/blob/make/view/chew.svg?raw=true' height='256'>
 </p>
 
-<h3 align='center'>chew.note</h3>
+<h3 align='center'>chew.star</h3>
 <p align='center'>
-  The BaseNote Linting Library
+  The Star Compiler Library
 </p>
 
 <br/>
