@@ -7,12 +7,12 @@
 <br/>
 
 <p align='center'>
-  <img src='https://github.com/termsurf/chew.star/blob/make/view/chew.svg?raw=true' height='256'>
+  <img src='https://github.com/termsurf/chew.tree/blob/make/view/chew.svg?raw=true' height='256'>
 </p>
 
-<h3 align='center'>chew.star</h3>
+<h3 align='center'>chew.tree</h3>
 <p align='center'>
-  The Star Compiler Library
+  The BaseTree Compiler Library
 </p>
 
 <br/>

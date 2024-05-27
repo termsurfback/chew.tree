@@ -1,5 +1,6 @@
 
-deck @termsurf/mesh
+deck @termsurf/chew
+  head <The BaseTree Compiler Library>
   mark <0.0.1>
   link @termsurf/bolt, mark <0.x.x>
   link @termsurf/bind, mark <0.x.x>
